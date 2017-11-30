@@ -25,7 +25,7 @@ pushd "$__script_path" 1>/dev/null
 popd 1>/dev/null
 
 __LIB_BUILD_SCRIPT_PATH=$OLDPWD
-__LIB_BUILD_SCRIPT_ETC_BUILD_PATH=$__LIB_BUILD_SCRIPT_PATH/../../../etc/codespunk/build
+__LIB_BUILD_SCRIPT_ETC_BUILD_PATH=$CODESPUNK_HOME/../../etc/codespunk/build
 
 source "$__LIB_BUILD_SCRIPT_PATH/_lib_exception.sh" || exit 1
 source "$__LIB_BUILD_SCRIPT_PATH/_lib_echo.sh" || exit 1
