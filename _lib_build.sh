@@ -74,7 +74,7 @@ function _build_project_makefile_gnu_e() {
       return 1
    }
    
-   source "$CODESPUNK_HOME/build/compilers/$BUILD_CONFIG_COMPILER" || {
+   source "$CODESPUNK_SYSTEM_CONFIG/build/compilers/$BUILD_CONFIG_COMPILER" || {
       _print_stacktrace_e "Invalid or unsupported compiler target"
       _environment_pop_r
       return 1
@@ -133,7 +133,7 @@ function _build_push_compiler_environment_r() {
    
    _environment_push
    
-   source "$CODESPUNK_HOME/build/compilers/$BUILD_CONFIG_COMPILER" || {
+   source "$CODESPUNK_SYSTEM_CONFIG/build/compilers/$BUILD_CONFIG_COMPILER" || {
       _print_stacktrace_e "Invalid or unsupported compiler target"
       _environment_pop_r
       return 1
