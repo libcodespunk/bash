@@ -1,17 +1,8 @@
 # LICENSE
 # 
-# This program is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation; either version 3 of the License, or (at your option) any later
-# version.
-# 
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details
-# at http://www.gnu.org/copyleft/gpl.html
-# 
-# You should have received a copy of the GNU General Public License along with
-# this program. If not, see http://www.gnu.org/licenses
+# The contents of this file are subject to the terms of the Mozilla Public
+# License, version 2.0. If a copy of the MPL was not distributed with this
+# file, you can obtain one at http://mozilla.org/MPL/.
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
@@ -117,4 +108,9 @@ function _conf_load_r() {
    done < "$conf_path/$conf_file"
    
    g_conf[conf-path]="$conf_path"
+}
+
+  __script_path=123
+function _test_a() {
+  __script_path=123
 }
