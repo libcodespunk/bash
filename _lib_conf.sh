@@ -110,8 +110,3 @@ function _conf_load_r() {
    
    g_conf[conf-path]="$conf_path"
 }
-
-  __script_path=123
-function _test_a() {
-  __script_path=123
-}

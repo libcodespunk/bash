@@ -46,8 +46,6 @@ function _build_project_makefile_gnu_e() {
    local _1="$1"; shift # Project makefile
    local _2="$1"; shift # Working directory
    
-   local script_path="$__LIB_BUILD_SCRIPT_PATH"
-   
    _environment_push
    
    [[ $BUILD_CONFIG_PROJECT_TYPE ]] || {
@@ -76,7 +74,7 @@ function _build_project_makefile_gnu_e() {
       return 1
    }
    
-   source "$script_path/../build/compilers/$BUILD_CONFIG_COMPILER" || {
+   source "$CODESPUNK_HOME/build/compilers/$BUILD_CONFIG_COMPILER" || {
       _print_stacktrace_e "Invalid or unsupported compiler target"
       _environment_pop_r
       return 1
@@ -100,7 +98,6 @@ function _build_project_makefile_gnu_e() {
 }
 
 function _build_set_compiler_r() {
-   local script_path="$__LIB_BUILD_SCRIPT_PATH"
    local compiler_path
    
    [[ $1 ]] || {
@@ -128,8 +125,6 @@ function _build_set_compiler_r() {
 }
 
 function _build_push_compiler_environment_r() {
-   local script_path="$__LIB_BUILD_SCRIPT_PATH"
-   
    [[ $BUILD_CONFIG_COMPILER ]] || {
       _print_stacktrace_e "Compiler is undefined"
       
@@ -138,7 +133,7 @@ function _build_push_compiler_environment_r() {
    
    _environment_push
    
-   source "$script_path/../build/compilers/$BUILD_CONFIG_COMPILER" || {
+   source "$CODESPUNK_HOME/build/compilers/$BUILD_CONFIG_COMPILER" || {
       _print_stacktrace_e "Invalid or unsupported compiler target"
       _environment_pop_r
       return 1
@@ -146,8 +141,6 @@ function _build_push_compiler_environment_r() {
 }
 
 function _build_pop_compiler_environment_r() {
-   local script_path="$__LIB_BUILD_SCRIPT_PATH"
-   
    [[ $BUILD_CONFIG_COMPILER ]] || {
       _print_stacktrace_e "Compiler is undefined"
       
@@ -169,17 +162,20 @@ function _build_set_target_postfix() {
    export BUILD_CONFIG_TARGET_POSTFIX="$1"  
 }
 
-_source_path_r "$__LIB_BUILD_SCRIPT_PATH/libbuild/config"
+_source_path_r "$CODESPUNK_HOME/bash/libbuild/config"
 
 case $(_os_get_system_name_e) in
-cygwin)
-   _source_path_r "$__LIB_BUILD_SCRIPT_PATH/libbuild/win32"
-   _source_path_r "$__LIB_BUILD_SCRIPT_PATH/libbuild/config/win32"
-   ;;
-darwin)
-   _source_path_r "$__LIB_BUILD_SCRIPT_PATH/libbuild/config/osx"
-   ;;
-linux)
-   _source_path_r "$__LIB_BUILD_SCRIPT_PATH/libbuild/config/linux"
-   ;;
+   cygwin )
+      _source_path_r "$CODESPUNK_HOME/bash/libbuild/win32"
+      _source_path_r "$CODESPUNK_HOME/bash/libbuild/config/win32"
+      
+      ;;
+   darwin )
+      _source_path_r "$CODESPUNK_HOME/bash/libbuild/config/osx"
+      
+      ;;
+   linux )
+      _source_path_r "$CODESPUNK_HOME/bash/libbuild/config/linux"
+      
+      ;;
 esac

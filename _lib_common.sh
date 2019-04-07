@@ -12,27 +12,6 @@ _H_CODESPUNK_BASH_COMMON=true
 
 ## ##
 
-function _source_r() {
-   local path=$1
-   local file=$2
-   
-   if [[ "$__g_lib_common_require_last_path" = "$path" ]]; then
-      source "$g_require_last_rpath/$2" ||
-         return 1
-      
-      return 0
-   fi
-   
-   __g_lib_common_require_last_path="$path"
-   
-   path="$(cd "$script_path/.."; pwd)"
-   
-   source "$path/$2" ||
-      return 1
-   
-   g_require_last_rpath="$path"
-}
-
 function _source_path_r() {
    local path="$1"
    
