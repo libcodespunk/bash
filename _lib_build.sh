@@ -25,7 +25,7 @@ source "$CODESPUNK_HOME/bash/_lib_os.sh" || exit 1
 source "$CODESPUNK_HOME/bash/_lib_require.sh" || exit 1
 source "$CODESPUNK_HOME/bash/libcoreutils/_dirname.sh" || exit 1
 
-source "$CODESPUNK_HOME/build/compilers.sh" || exit 1
+source "$CODESPUNK_SYSTEM_CONFIG/build/compilers.sh" || exit 1
 
 ## ##
 
@@ -74,7 +74,7 @@ function _build_project_makefile_gnu_e() {
       return 1
    }
    
-   source "$CODESPUNK_SYSTEM_CONFIG/build/compilers/$BUILD_CONFIG_COMPILER" || {
+   source "$CODESPUNK_HOME/build/compilers/$BUILD_CONFIG_COMPILER" || {
       _print_stacktrace_e "Invalid or unsupported compiler target"
       _environment_pop_r
       return 1
@@ -106,7 +106,7 @@ function _build_set_compiler_r() {
       return 1
    }
    
-   read -r compiler_path < "$CODESPUNK_HOME/bash/build/compilers/$1"
+   read -r compiler_path < "$CODESPUNK_SYSTEM_CONFIG/build/compilers/$1"
    
    [[ $compiler_path ]] || {
       _print_stacktrace_e "Invalid compiler path for $1"
