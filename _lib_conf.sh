@@ -98,7 +98,7 @@ function _conf_load_r() {
    while read a; do
      if [[ $a =~ ^[^#]*= ]]; then
        name=${a%%=*}
-       value="${a##*=}"
+       value="${a#*=}"
        value="${value/\$conf/$conf_path}"
        
        # Strip out any trailing carriage returns or newlines
