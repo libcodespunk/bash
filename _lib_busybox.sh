@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_BUSYBOX ]] &&
+   return
+_H_CODESPUNK_BASH_BUSYBOX=true
+
+## ##
+
 function _busybox() {
    ! [[ $__g_busybox_exists ]] &&
       return 1

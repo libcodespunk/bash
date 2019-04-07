@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_STRING_TRIM ]] &&
+   return
+_H_CODESPUNK_BASH_STRING_TRIM=true
+
+## ##
+
 function _str_field_e() {
    local to_search="$1"
    local index=$2

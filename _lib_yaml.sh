@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_YAML ]] &&
+   return
+_H_CODESPUNK_BASH_YAML=true
+
+## ##
+
 k_yaml_KEY=__YAMLKEY
 k_yaml_KEY_TYPE=__YAMLKEY_TYPE
 k_yaml_KEY_TYPE_SECTION=__YAMLKEY_SECTION

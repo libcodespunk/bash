@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_EXCEPTION ]] &&
+   return
+_H_CODESPUNK_BASH_EXCEPTION=true
+
+## ##
+
 function _print_stacktrace_e() {
    >&2 echo 'Exception in thread "main": '$@
    

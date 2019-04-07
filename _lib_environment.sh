@@ -6,18 +6,20 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
-__script_path=${BASH_SOURCE[0]%/*}
+[[ $_H_CODESPUNK_BASH_ENVIRONMENT ]] &&
+   return
+_H_CODESPUNK_BASH_ENVIRONMENT=true
 
-! [[ -f $__script_path ]] ||
-   [[ $__script_path = */* ]] ||
-      __script_path=.
+[[ $CODESPUNK_HOME ]] || {
+>&2 echo ERROR: CODESPUNK_HOME is set to an invalid directory.
+>&2 echo CODESPUNK_HOME = \"$CODESPUNK_HOME\"
+>&2 echo Please set the CODESPUNK_HOME variable in your environment to match \
+the location of your libcodespunk installation
+}
 
-pushd "$__script_path" 1>/dev/null
-popd 1>/dev/null
+source "$CODESPUNK_HOME/bash/libstring/_str_field.sh" || exit 1
 
-__LIB_ENVIRONMENT_SCRIPT_PATH=$OLDPWD
-
-source "$__LIB_ENVIRONMENT_SCRIPT_PATH/libstring/_str_field.sh" || exit 1
+## ##
 
 declare g_env_size
 declare -A g_env_val

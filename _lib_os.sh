@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_OS ]] &&
+   return
+_H_CODESPUNK_BASH_OS=true
+
+## ##
+
 function _os_get_system_name_e() {
    echo $(uname -s | cut -d'-' -f1 | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
 }

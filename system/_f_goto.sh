@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_SYSTEM_GOTO ]] &&
+   return
+_H_CODESPUNK_BASH_SYSTEM_GOTO=true
+
+## ##
+
 function _goto {
     local $__goto_label=$1
     

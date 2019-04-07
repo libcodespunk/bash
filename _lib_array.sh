@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_ARRAY ]] &&
+   return
+_H_CODESPUNK_BASH_ARRAY=true
+
+## ##
+
 function _array_copy {
    local _1="$1" # Name of source array
    local _2="$2" # Name of destination array

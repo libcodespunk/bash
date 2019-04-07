@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_ECHO ]] &&
+   return
+_H_CODESPUNK_BASH_ECHO=true
+
+## ##
+
 function _echo_error_e() {
    local trailing_newline=true
    

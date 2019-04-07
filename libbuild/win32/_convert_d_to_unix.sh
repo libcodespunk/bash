@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BUILD_WIN32_CONVERT_D_TO_UNIX ]] &&
+   return
+_H_CODESPUNK_BUILD_WIN32_CONVERT_D_TO_UNIX=true
+
+## ##
+
 function _build_win32_convert_d_to_unix() {
    # Convert crlf to lf
    cat $@ | tr -d '\r' > $@.tmp

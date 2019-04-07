@@ -6,19 +6,21 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
-__script_path=${BASH_SOURCE[0]%/*}
+[[ $_H_CODESPUNK_BASH_REQUIRE ]] &&
+   return
+_H_CODESPUNK_BASH_REQUIRE=true
 
-! [[ -f $__script_path ]] ||
-   [[ $__script_path = */* ]] ||
-      __script_path=.
+[[ $CODESPUNK_HOME ]] || {
+>&2 echo ERROR: CODESPUNK_HOME is set to an invalid directory.
+>&2 echo CODESPUNK_HOME = \"$CODESPUNK_HOME\"
+>&2 echo Please set the CODESPUNK_HOME variable in your environment to match \
+the location of your libcodespunk installation
+}
 
-pushd "$__script_path" 1>/dev/null
-popd 1>/dev/null
+source "$CODESPUNK_HOME/bash/_lib_echo.sh" || exit 1
+source "$CODESPUNK_HOME/bash/_lib_exception.sh" || exit 1
 
-__LIB_REQUIRE_SCRIPT_PATH=$OLDPWD
-
-source "$__LIB_REQUIRE_SCRIPT_PATH/_lib_echo.sh" || exit 1
-source "$__LIB_REQUIRE_SCRIPT_PATH/_lib_exception.sh" || exit 1
+## ##
 
 function _require_get_bash_version_major_e() {
    echo "$(bash --version | head -n1 | cut -d' ' -f4 | cut -d'.' -f1)"

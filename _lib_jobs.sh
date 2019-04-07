@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_JOBS ]] &&
+   return
+_H_CODESPUNK_BASH_JOBS=true
+
+## ##
+
 function _jobs_get_count_e {
    jobs -r | wc -l | tr -d " "
 }

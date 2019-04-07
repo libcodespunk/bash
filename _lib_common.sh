@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_COMMON ]] &&
+   return
+_H_CODESPUNK_BASH_COMMON=true
+
+## ##
+
 function _source_r() {
    local path=$1
    local file=$2

@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_SYSTEM_MD5 ]] &&
+   return
+_H_CODESPUNK_BASH_SYSTEM_MD5=true
+
+## ##
+
 # COMMAND
 #   _md5 - wraps environment binary or busybox equivalent if available
 #   

@@ -6,6 +6,12 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ $_H_CODESPUNK_BASH_COREUTILS_BASENAME ]] &&
+   return
+_H_CODESPUNK_BASH_COREUTILS_BASENAME=true
+
+## ##
+
 function __EXPORT_RESULT() {
    local result
    
