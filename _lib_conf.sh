@@ -23,7 +23,8 @@ source "$CODESPUNK_HOME/bash/libcoreutils/_dirname.sh" || exit 1
 
 ## ##
 
-declare -A g_conf
+declare -A g_conf # Deprecated
+declare -A _G_conf
 
 function _p_conf_find_e() {
   local path="$(pwd)"
@@ -105,8 +106,10 @@ function _conf_load_r() {
        value=${value%[$'\r\n']}
        
        g_conf[$name]="$value"
+       _G_conf[$name]="$value"
      fi
    done < "$conf_path/$conf_file"
    
    g_conf[conf-path]="$conf_path"
+   _G_conf[conf-path]="$conf_path"
 }
