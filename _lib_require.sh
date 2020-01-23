@@ -11,10 +11,12 @@
 _H_CODESPUNK_BASH_REQUIRE=true
 
 [[ $CODESPUNK_HOME ]] || {
->&2 echo ERROR: CODESPUNK_HOME is set to an invalid directory.
->&2 echo CODESPUNK_HOME = \"$CODESPUNK_HOME\"
->&2 echo Please set the CODESPUNK_HOME variable in your environment to match \
-the location of your libcodespunk installation
+   >&2 echo A required environment variable is set to an invalid directory.
+   >&2 echo CODESPUNK_HOME = \"$CODESPUNK_HOME\"
+   >&2 echo Please configure your environment to include the location of your \
+   libcodespunk installation.
+   
+   exit 1
 }
 
 source "$CODESPUNK_HOME/bash/_lib_echo.sh" || exit 1
