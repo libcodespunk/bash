@@ -32,7 +32,7 @@ EOF
    exit 1
 }
 
-source "$CODESPUNK_HOME/bash/_lib_color.sh" || exit 1
+source "$CODESPUNK_HOME/bash/_lib_display.sh" || exit 1
 
 ## ##
 
