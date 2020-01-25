@@ -112,10 +112,22 @@ function _display_set_color() {
 }
 
 function _display_format_text_e() {
+   local color
+   
    echo -e -n '\033[0m'
-   while _display_is_color_name $1; do
-      _display_set_color $1
-      shift
+   
+   while true; do
+      case $1 in
+      --color=[a-z]*)
+         color=$1
+         
+         _display_set_color ${color#*=}
+         
+         shift
+      ;;
+      *)
+         break
+      esac
    done
    
    echo -e $@'\033[0m'

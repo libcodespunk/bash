@@ -32,6 +32,7 @@ EOF
    exit 1
 }
 
+source "$CODESPUNK_HOME/bash/_lib_display.sh" || exit 1
 source "$CODESPUNK_HOME/bash/_lib_echo.sh" || exit 1
 source "$CODESPUNK_HOME/bash/_lib_exception.sh" || exit 1
 source "$CODESPUNK_HOME/bash/libcoreutils/_dirname.sh" || exit 1
@@ -48,26 +49,26 @@ function _p_conf_find_e() {
 
   # Step backwards along the parent directory tree while attempting to locate
   # the target conf file
-  if [[ "$1" = "-p" ]]; then
+  [[ "$1" = "-p" ]] && {
      search_parents=true
      shift
-  fi
+  }
 
   local to_find=$1
 
   extension=${to_find##*.}
 
-  if [[ -f $to_find && ${extension,,} = "conf" ]]; then
+  [[ -f $to_find && ${extension,,} = "conf" ]] && {
      echo $to_find
      
      return
-  fi
+  }
 
   while true; do
-     if [[ -f $path/$to_find ]]; then
+     [[ -f $path/$to_find ]] && {
         echo $path/$to_find
         break
-     fi
+     }
      
      if ! [[ $search_parents ]] || [[ $path == "/" ]]; then
         break
@@ -85,34 +86,36 @@ function _conf_load_r() {
    
    # Step backwards along the parent directory tree while attempting to locate
    # the target conf file
-   if [[ "$1" = "-p" ]]; then
+   [[ "$1" = "-p" ]] && {
       search_parents=true
       shift
-   fi
+   }
    
-   if ! [[ $1 ]]; then
-      _print_stacktrace_e "No conf specified"
+   [[ $1 ]] || {
+      _print_stacktrace_e --color RED "No config file specified."
       
       return 1
-   fi
+   }
    
-   if [[ $search_parents ]]; then
-      conf_path=$(_p_conf_find_e -p $1)
-   else
+   [[ $search_parents ]] &&
+      conf_path=$(_p_conf_find_e -p $1) \
+   ||
       conf_path=$(_p_conf_find_e $1)
-   fi
    
-   if ! [[ $conf_path ]]; then
-      _print_stacktrace_e "Couldn't find $1"
+   [[ $conf_path ]] || {
+      m=$(_display_format_text_e RED \
+         "Invalid config file specified or no access: $1.")
+      
+      _print_stacktrace_e $m
       
       return 1
-   fi
+   }
    
    conf_path="$(dirname "$conf_path")"
    conf_file="$(basename $1)"
    
    while read a; do
-     if [[ $a =~ ^[^#]*= ]]; then
+     [[ $a =~ ^[^#]*= ]] && {
        name=${a%%=*}
        value="${a#*=}"
        value="${value/\$conf/$conf_path}"
@@ -122,9 +125,9 @@ function _conf_load_r() {
        
        g_conf[$name]="$value"
        _G_conf[$name]="$value"
-     fi
+     }
    done < "$conf_path/$conf_file"
    
-   g_conf[conf-path]="$conf_path"
+   g_conf[conf-path]="$conf_path" # Deprecated
    _G_conf[conf-path]="$conf_path"
 }

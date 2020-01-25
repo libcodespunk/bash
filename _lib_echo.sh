@@ -49,28 +49,32 @@ function _echo_error_e() {
          echo "! -n"
       ;;
       
-      -c)
-         shift
+      --color=[a-z]*)
          color=$1
+         color=${color#*=}
+         
          shift
       ;;
+      
       *)
          break
       esac
    done
    
-   if [[ "$@" ]]; then
+   [[ "$@" ]] && {
       line="$(caller 0 | cut -d' ' -f1)"
       file="$(caller 0 | cut -d' ' -f3)"
       
       >&2 echo -n "$(basename $file):$line "
       
       [[ $color ]] && {
-         >&2 _display_format_text_e $color $@
-      } || \
+         _display_set_color $color
          >&2 echo -e -n $@
-   fi
+         _display_set_color RESET
+      } ||
+         >&2 echo -e -n $@
+   }
    
-   [[ $trailing_newline ]] && \
+   [[ $trailing_newline ]] &&
       >&2 printf "\n"
 }
