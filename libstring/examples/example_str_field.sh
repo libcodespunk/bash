@@ -6,11 +6,24 @@
 # 
 # Author: Matthew D'Onofrio (http://codespunk.com)
 
+[[ ! $CODESPUNK_HOME && -d "/usr/local/lib/codespunk/bash" ]] &&
+   export CODESPUNK_HOME="/usr/local/lib/codespunk"
+
 [[ $CODESPUNK_HOME ]] || {
-   >&2 echo A required environment variable is set to an invalid directory.
-   >&2 echo CODESPUNK_HOME = \"$CODESPUNK_HOME\"
-   >&2 echo Please configure your environment to include the location of your \
-   libcodespunk installation.
+>&2 cat << EOF
+ A required environment variable is set to an invalid directory:
+    CODESPUNK_HOME = "$CODESPUNK_HOME"
+ 
+ Please configure your environment to include the location of your libcodespunk
+ installation.
+ 
+ If the required dependencies are not available from the package manager, they
+ can be downloaded and installed directly from the following repository:
+ 
+ $ git clone https://github.com/zhro/libcodespunk_bash.git
+ $ cd libcodespunk_bash
+ $ sudo make install
+EOF
    
    exit 1
 }

@@ -13,7 +13,7 @@ _H_CODESPUNK_BASH_EXCEPTION=true
 ## ##
 
 function _print_stacktrace_e() {
-   >&2 echo 'Exception in thread "main": '$@
+   >&2 echo -e 'Exception in thread "main": '$@
    
    local i
    local stack_size=${#FUNCNAME[@]}
