@@ -12,7 +12,7 @@ _H_CODESPUNK_BASH_EXCEPTION=true
 
 ## ##
 
-function _print_stacktrace_e() {
+function _exception_print_stacktrace_e() {
    local color=
    
    while true; do
