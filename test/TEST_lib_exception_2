@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# LICENSE
+#
+# The contents of this file are subject to the terms of the Mozilla Public
+# License, version 2.0. If a copy of the MPL was not distributed with this
+# file, you can obtain one at http://mozilla.org/MPL/.
+#
+# Author: Matthew D'Onofrio (http://codespunk.com)
+
+script_path=${BASH_SOURCE[0]%/*}
+cd "$script_path"
+
+export CODESPUNK_HOME=$(realpath "$script_path/../..")
+
+## ##
+
+## libcodespunk/bash
+source "$CODESPUNK_HOME/bash/_lib_exception.sh" || exit 1
+
+##
+
+_exception_print_stacktrace_e --color=RED "Stacktrace here (red)."
