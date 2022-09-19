@@ -92,7 +92,7 @@ function _conf_load_r() {
    }
    
    [[ $1 ]] || {
-      _print_stacktrace_e --color RED "No config file specified."
+      _exception_print_stacktrace_e "No config file specified."
       
       return 1
    }
@@ -103,10 +103,8 @@ function _conf_load_r() {
       conf_path=$(_p_conf_find_e $1)
    
    [[ $conf_path ]] || {
-      m=$(_display_format_text_e RED \
-         "Invalid config file specified or no access: $1.")
-      
-      _print_stacktrace_e $m
+      _exception_print_stacktrace_e \
+        "Invalid config file specified or no access: $1."
       
       return 1
    }

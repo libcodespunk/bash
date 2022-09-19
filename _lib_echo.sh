@@ -49,7 +49,7 @@ function _echo_error_e() {
          echo "! -n"
       ;;
       
-      --color=[a-z]*)
+      --color=[a-zA-Z]*)
          color=$1
          color=${color#*=}
          
@@ -68,13 +68,15 @@ function _echo_error_e() {
       >&2 echo -n "$(basename $file):$line "
       
       [[ $color ]] && {
-         _display_set_color $color
+         _display_set_color >&2 $color
          >&2 echo -e -n $@
-         _display_set_color RESET
+         _display_set_color >&2 RESET
       } ||
          >&2 echo -e -n $@
    }
    
    [[ $trailing_newline ]] &&
       >&2 printf "\n"
+   
+   return 1
 }

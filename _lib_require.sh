@@ -43,7 +43,7 @@ function _require_get_bash_version_major_e() {
 
 function _require_bash_3_r() {
    if ! (( $(_require_get_bash_version_major_e) >= 3 )); then
-      _print_stacktrace_e "Bash 3 or higher is required to run this script"
+      _exception_print_stacktrace_e "Bash 3 or higher is required to run this script"
       
       return 1
    fi
@@ -51,7 +51,7 @@ function _require_bash_3_r() {
 
 function _require_bash_4_r() {
    if ! (( $(_require_get_bash_version_major_e) >= 4 )); then
-      _print_stacktrace_e "Bash 4 or higher is required to run this script"
+      _exception_print_stacktrace_e "Bash 4 or higher is required to run this script"
       
       return 1
    fi
@@ -83,7 +83,7 @@ function _require_report_r() {
    for (( i=0; i<$len; i++ )); do
       d=${__g_lib_require_dependencies[$i]}
       
-      _print_stacktrace_e "Missing script dependency '$d'"
+      _exception_print_stacktrace_e "Missing script dependency '$d'"
       
       error=true
    done

@@ -35,6 +35,25 @@ EOF
    exit 1
 }
 
+[[ $CODESPUNK_ETC ]] || {
+>&2 cat << EOF
+ A required environment variable is set to an invalid directory:
+    CODESPUNK_ETC = "$CODESPUNK_ETC"
+ 
+ Please configure your environment to include the location of your libcodespunk
+ installation.
+ 
+ If the required dependencies are not available from the package manager, they
+ can be downloaded and installed directly from the following repository:
+ 
+ $ git clone https://github.com/zhro/libcodespunk_bash.git
+ $ cd libcodespunk_bash
+ $ sudo make install
+EOF
+   
+   exit 1
+}
+
 source "$CODESPUNK_HOME/bash/_lib_common.sh" || exit 1
 source "$CODESPUNK_HOME/bash/_lib_echo.sh" || exit 1
 source "$CODESPUNK_HOME/bash/_lib_environment.sh" || exit 1
@@ -43,7 +62,7 @@ source "$CODESPUNK_HOME/bash/_lib_os.sh" || exit 1
 source "$CODESPUNK_HOME/bash/_lib_require.sh" || exit 1
 source "$CODESPUNK_HOME/bash/libcoreutils/_dirname.sh" || exit 1
 
-source "$CODESPUNK_SYSTEM_CONFIG/build/compilers.sh" || exit 1
+source "$CODESPUNK_ETC/build/compilers.sh" || exit 1
 
 ## ##
 
@@ -124,7 +143,7 @@ function _build_set_compiler_r() {
       return 1
    }
    
-   read -r compiler_path < "$CODESPUNK_SYSTEM_CONFIG/build/compilers/$1"
+   read -r compiler_path < "$CODESPUNK_ETC/build/compilers/$1"
    
    [[ $compiler_path ]] || {
       _print_stacktrace_e "Invalid compiler path for $1"
@@ -151,7 +170,7 @@ function _build_push_compiler_environment_r() {
    
    _environment_push
    
-   source "$CODESPUNK_SYSTEM_CONFIG/build/compilers/$BUILD_CONFIG_COMPILER" || {
+   source "$CODESPUNK_ETC/build/compilers/$BUILD_CONFIG_COMPILER" || {
       _print_stacktrace_e "Invalid or unsupported compiler target"
       _environment_pop_r
       return 1

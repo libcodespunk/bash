@@ -118,7 +118,7 @@ function _display_format_text_e() {
    
    while true; do
       case $1 in
-      --color=[a-z]*)
+      --color=[a-zA-Z]*)
          color=$1
          
          _display_set_color ${color#*=}

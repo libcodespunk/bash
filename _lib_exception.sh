@@ -39,27 +39,27 @@ source "$CODESPUNK_HOME/bash/_lib_display.sh" || exit 1
 function _exception_print_stacktrace_e() {
    local color=
    
-   while true; do
-      case $1 in
-      --color=[a-z]*)
-         color=$1
-         color=${color#*=}
+   # while true; do
+   #    case $1 in
+   #    --color=[a-zA-Z]*)
+   #       color=$1
+   #       color=${color#*=}
          
-         shift
-      ;;
+   #       shift
+   #    ;;
       
-      *)
-         break
-      esac
-   done
+   #    *)
+   #       break
+   #    esac
+   # done
    
    >&2 echo -e -n 'Exception in thread "main": '
    
-   _display_set_color $color
+   _display_set_color >&2 RED
    
    >&2 echo $@
    
-   _display_set_color RESET
+   _display_set_color >&2 RESET
    
    local i
    local stack_size=${#FUNCNAME[@]}
@@ -77,6 +77,9 @@ function _exception_print_stacktrace_e() {
       line_number=${BASH_LINENO[(( i - 1 ))]}
       source_file=${BASH_SOURCE[$i]}
       
+      # Replace all / with \
+      source_file=${source_file////\\}
+      
       ! [ x$source_file = x ] &&
          stack_path=$source_file:$line_number \
       ||
@@ -84,4 +87,6 @@ function _exception_print_stacktrace_e() {
       
       >&2 echo "   at $function($stack_path)"
    done
+   
+   return 1
 }
